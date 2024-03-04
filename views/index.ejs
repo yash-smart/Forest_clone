@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest clone</title>
+    <link href="main.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <ul class="nav nav-pills navbar-my">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Forest clone</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/add">Add task</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/stat">Statistics</a>
+        </li>
+    </ul>
+    <div class="navbar-my">
+        <!-- <h1>Forest clone</h1> -->
+        <h4 id="points">Total points: <%= points_before %></h4>
+        <% for (let i = 0;i<tasks.length;i++) { %>
+            <div id="container-my-1">
+                <p id="task-name"><%= tasks[i] %></p>
+                <p>Points: <%= points[i] %></p>
+                <h5>Time focused: <%= times[i].split(":")[0] %> hours <%= times[i].split(':')[1] %> minutes</h5>
+                <% if ((session_running !== null) && (session_running == ids[i])) { %>
+                    <p>Session is running</p>
+                <% } %>
+                <div class="buttons">
+                    <a href="/modify/<%= ids[i] %>"><button>Modify task</button></a>
+                    <a href="/delete/<%= ids[i] %>"><button>Delete task</button></a>
+                    <a href="/complete/<%= ids[i] %>"><button>Mark as complete</button></a>
+                    <a href="/start/<%= ids[i] %>"><button class="click1">Start session</button></a>
+                    <a href="/stop/<%= ids[i] %>"><button class="click2">Stop session</button></a>
+                </div>
+            </div>    
+        <% } %>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        function notification1() {
+            Notification.requestPermission().then((perm) => {
+                if (perm === "granted") {
+                    new Notification("Forest clone",{
+                        body : "Session started"
+                    })
+                }
+            })
+        }
+        function notification2() {
+            Notification.requestPermission().then((perm) => {
+                if (perm === "granted") {
+                    new Notification("Forest clone",{
+                        body : "Session ended"
+                    })
+                }
+            })
+        }
+        let click1 = document.getElementsByClassName("click1")
+        let click2 = document.getElementsByClassName("click2")
+        for (let i=0;i<click1.length;i++) {
+            click1[i].addEventListener(notification1)
+        }
+        for (let i=0;i<click2.length;i++) {
+            click2[i].addEventListener(notification2)
+        }
+    </script>
+</body>
+</html>

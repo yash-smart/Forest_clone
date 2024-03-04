@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add/Modify task</title>
+    <link rel="stylesheet" href="/add_task_2.css" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+</head>
+<body>
+    <% if (!(locals.flag)) { %>
+        <ul class="nav nav-pills navbar-my">
+            <li class="nav-item navbar-item-my">
+              <a class="nav-link" href="/">Forest clone</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/add">Add task</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/stat">Statistics</a>
+            </li>
+        </ul>
+        <div class="navbar-my container-my-1">
+            <form action="/add-task" method="POST">
+                <input type="text" name="task" placeholder="Task">
+                <input type="text" name="points" placeholder="Points">
+                <input type="submit" value="Add task">
+            </form>
+        </div>
+    <% } else { %>
+        <form action="/modify-task/<%= id %>" method="POST">
+            <input type="text" name="task" placeholder="Task" value="<%= task %>">
+            <input type="text" name="points" placeholder="Points" value="<%= points %>">
+            <input type="submit" value="Modify task">
+        </form>
+    <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

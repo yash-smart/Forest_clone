@@ -1,0 +1,14 @@
+.navbar-my {
+    padding-top: 10px;
+    padding-left: 10px !important;
+}
+body {
+    background-color: black !important;
+}
+.stat {
+    color: aquamarine;
+}
+.container-1 {
+    margin-left: 20px;
+    margin-top: 20px;
+}
